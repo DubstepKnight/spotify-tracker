@@ -1,0 +1,14 @@
+version: '3.9'
+
+services: 
+  nextjs:
+    build:
+      context: ./
+      target: development
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/usr/src/app/
+    environment:
+      SPOTIFY_BASE_URL: https://api.spotify.com/v1
