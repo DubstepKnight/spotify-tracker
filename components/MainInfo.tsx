@@ -1,4 +1,4 @@
-import { Group, Image, Stack, Text, Title } from '@mantine/core';
+import { Badge, Group, Image, Stack, Text, Title } from '@mantine/core';
 import React from 'react';
 
 interface IMainInfo {
@@ -54,13 +54,19 @@ const MainInfo: React.FC<IMainInfo> = ({
           ))}
         </Group>
         <Group>
-          <Text size='sm' color={'white'}> {album.release_date.slice(0, 4)} </Text>
+          <Text size='sm' color={'white'}>
+            {album.release_date.slice(0, 4)}
+          </Text>
           <Text color={'white'}> • </Text>
-          <Text size='sm' color={'white'}> {millisecondsToTime(duration)} </Text>
+          <Text size='sm' color={'white'}>
+            {millisecondsToTime(duration)}
+          </Text>
         </Group>
-        <Text size='sm' color={'white'}> 
-          { explicit ? 'Explicit' : '' }
-        </Text>
+        {explicit ? (
+          <Badge style={{ width: 'fit-content' }} color='green' fullWidth={true} variant='outline'>
+            Explicit
+          </Badge>
+        ) : null}
         <audio controls>
           <source src={audioPreview} type={'audio/mpeg'} />
         </audio>
