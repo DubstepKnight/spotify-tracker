@@ -1,5 +1,6 @@
-import { Badge, Group, Image, Stack, Text, Title } from '@mantine/core';
+import { Avatar, Badge, Group, Image, Stack, Text, Title } from '@mantine/core';
 import React from 'react';
+import { millisecondsToTime } from '../utils';
 
 interface IMainInfo {
   album: any;
@@ -9,17 +10,6 @@ interface IMainInfo {
   duration: number;
   audioPreview: string;
 }
-
-const millisecondsToTime = (duration: number) => {
-  const seconds = Math.floor(duration / 1000);
-  const minutes = Math.floor(seconds / 60);
-  let remainder: string | number = seconds % 60;
-  if (remainder < 10) {
-    remainder = `0${remainder}`;
-  }
-  const time = `${minutes}:${remainder}`;
-  return time;
-};
 
 const MainInfo: React.FC<IMainInfo> = ({
   album,
@@ -31,7 +21,7 @@ const MainInfo: React.FC<IMainInfo> = ({
 }) => {
   const { url, height, width } = album.images[1];
 
-  console.log('explicit: ', explicit);
+  console.log('artists: ', artists);
 
   return (
     <Group position='left'>
@@ -48,12 +38,20 @@ const MainInfo: React.FC<IMainInfo> = ({
         </Title>
         <Group>
           {artists.map((artist) => (
-            <Text weight={700} color={'white'} key={artist.id}>
-              {artist.name}
-            </Text>
+            <Group spacing={'xs'} key={artist.id}>
+              <Avatar
+                radius={'xl'}
+                size={'sm'}
+                alt={`${artist.name}'s picture`}
+                src={artist?.images[2].url}
+              />
+              <Text weight={700} color={'white'}>
+                {artist.name}
+              </Text>
+            </Group>
           ))}
         </Group>
-        <Group>
+        <Group spacing={'xs'}>
           <Text size='sm' color={'white'}>
             {album.release_date.slice(0, 4)}
           </Text>
@@ -63,7 +61,12 @@ const MainInfo: React.FC<IMainInfo> = ({
           </Text>
         </Group>
         {explicit ? (
-          <Badge style={{ width: 'fit-content' }} color='green' fullWidth={true} variant='outline'>
+          <Badge
+            style={{ width: 'fit-content' }}
+            color='green'
+            fullWidth={true}
+            variant='outline'
+          >
             Explicit
           </Badge>
         ) : null}
