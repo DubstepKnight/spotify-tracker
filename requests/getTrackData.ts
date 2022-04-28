@@ -4,8 +4,8 @@ type AccessToken = {
   expires_in: number;
 }
 
-export const getTrackData = async (token: AccessToken) => {
-  const res = await fetch(`${process.env.SPOTIFY_BASE_URL}/tracks/2TmqHjg7uhizGndzXQdFuf`, {
+export const getTrackData = async (token: AccessToken, trackId: string) => {
+  const res = await fetch(`${process.env.SPOTIFY_BASE_URL}/tracks/${trackId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',

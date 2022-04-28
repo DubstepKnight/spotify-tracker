@@ -4,8 +4,8 @@ type AccessToken = {
   expires_in: number;
 }
 
-export const getArtist = async (token: AccessToken, artistId: string) => {
-  const res = await fetch(`${process.env.SPOTIFY_BASE_URL}/artists/${artistId}`, {
+export const getTrackAudioFeatures = async (token: AccessToken, trackId: string) => {
+  const res = await fetch(`${process.env.SPOTIFY_BASE_URL}/audio-features/${trackId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
