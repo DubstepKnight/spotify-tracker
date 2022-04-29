@@ -5,7 +5,7 @@ type AccessToken = {
 }
 
 export const getTrackData = async (token: AccessToken, trackId: string) => {
-  const res = await fetch(`${process.env.SPOTIFY_BASE_URL}/tracks/${trackId}`, {
+  const res = await fetch(`${process.env.SPOTIFY_BASE_URL}/tracks/${trackId}?market=FI`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
