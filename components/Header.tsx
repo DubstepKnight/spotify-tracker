@@ -15,7 +15,7 @@ const CustomHeader = () => {
           order={2}
           style={{ color: 'white' }}
         >
-          Spotify Track Checker
+          Spotifire!
         </Title>
       </Group>
     </Header>

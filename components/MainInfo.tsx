@@ -21,8 +21,6 @@ const MainInfo: React.FC<IMainInfo> = ({
 }) => {
   const { url, height, width } = album.images[1];
 
-  console.log('artists: ', artists);
-
   return (
     <Group position='left'>
       <Image
@@ -30,6 +28,11 @@ const MainInfo: React.FC<IMainInfo> = ({
         src={url}
         width={width}
         height={height}
+        styles={{
+          imageWrapper: {
+            boxShadow: '0 4px 60px rgb(255 255 255 / 40%)',
+          }
+        }}
       />
       <Stack spacing={'xs'} justify={'flex-end'}>
         <Text color={'white'}> SONG </Text>
@@ -60,7 +63,7 @@ const MainInfo: React.FC<IMainInfo> = ({
             {millisecondsToTime(duration)}
           </Text>
         </Group>
-        {explicit ? (
+        {explicit && (
           <Badge
             style={{ width: 'fit-content' }}
             color='green'
@@ -69,7 +72,7 @@ const MainInfo: React.FC<IMainInfo> = ({
           >
             Explicit
           </Badge>
-        ) : null}
+        )}
         <audio controls>
           <source src={audioPreview} type={'audio/mpeg'} />
         </audio>
