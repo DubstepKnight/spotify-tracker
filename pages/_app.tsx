@@ -4,11 +4,12 @@ import {
   AppShell,
   ColorScheme,
   ColorSchemeProvider,
+  Container,
   MantineProvider,
 } from '@mantine/core';
 import { useState } from 'react';
 import Head from 'next/head';
-import { Header } from '../components';
+import { Footer, Header } from '../components';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [colorScheme, setColorScheme] =
@@ -38,6 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <AppShell
           padding={'md'}
           header={<Header />}
+          footer={<Footer />}
           styles={(theme) => ({
             main: {
               backgroundColor:
@@ -47,7 +49,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             },
           })}
         >
-          <Component {...pageProps} />
+          <Container size={'xl'} px={0} >
+            <Component {...pageProps} />
+          </Container>
         </AppShell>
       </MantineProvider>
     </ColorSchemeProvider>
