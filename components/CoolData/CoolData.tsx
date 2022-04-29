@@ -1,20 +1,34 @@
 import { SimpleGrid } from '@mantine/core';
 import React from 'react';
 import { AudioFeatures } from '../../types';
-import Popularity from './Popularity';
-import TrackCharts from './TrackCharts';
+import Popularity from './Popularity/Popularity';
+import TrackCharactertistics from './TrackCharactertistics/TrackCharacteristics';
 
 interface ICoolData {
-  popularity: number;
+  currentTrack: any;
   name: string;
   audioFeatures: AudioFeatures;
+  artistsTopTracks: any[];
 }
 
-const CoolData: React.FC<ICoolData> = ({ popularity, audioFeatures }) => {
+const CoolData: React.FC<ICoolData> = ({
+  currentTrack,
+  audioFeatures,
+  name,
+  artistsTopTracks,
+}) => {
+
   return (
-    <SimpleGrid cols={2} spacing={'md'}>
-      <Popularity popularity={popularity} />
-      <TrackCharts audioFeatures={audioFeatures} />
+    <SimpleGrid
+      breakpoints={[
+        { minWidth: 300, cols: 1 },
+        { minWidth: 'sm', cols: 2 },
+      ]}
+      cols={2}
+      spacing={'xl'}
+    >
+      <Popularity currentTrack={currentTrack} artistsTopTracks={artistsTopTracks} />
+      <TrackCharactertistics audioFeatures={audioFeatures} songName={name} />
     </SimpleGrid>
   );
 };
