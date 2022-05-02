@@ -8,6 +8,7 @@ import { getArtist } from '../../requests/getArtist';
 import { getTrackAudioFeatures } from '../../requests/getTrackAudioFeatures';
 import { AudioFeatures } from '../../types';
 import { getArtistsTopTracks } from '../../requests/getArtistsTopTracks';
+import { getTrackAudioAnalysis } from '../../requests/getAudioAnalysis';
 
 interface ITrackPage {
   trackData: any;
@@ -15,6 +16,7 @@ interface ITrackPage {
   audioFeatures: AudioFeatures;
   error: Error;
   artistsTopTracks: any[];
+  audioAnalysis: any;
 }
 
 const TrackPage: NextPage<ITrackPage> = ({
@@ -22,13 +24,12 @@ const TrackPage: NextPage<ITrackPage> = ({
   artists,
   error,
   audioFeatures,
-  artistsTopTracks
+  artistsTopTracks,
+  audioAnalysis
 }) => {
   if (error) {
     return <div>{error.message}</div>;
   }
-
-  console.log('trackData: ', trackData);
 
   return (
     <Container fluid={true} px={0}>
@@ -46,6 +47,7 @@ const TrackPage: NextPage<ITrackPage> = ({
         name={trackData.name}
         audioFeatures={audioFeatures}
         artistsTopTracks={artistsTopTracks}
+        audioAnalysis={audioAnalysis}
       />
     </Container>
   );
@@ -55,6 +57,7 @@ export default TrackPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
+    console.time('start');
     const token = await getToken();
     const trackData = await getTrackData(token, params?.id as string);
     const { artists, ...track } = trackData;
@@ -70,12 +73,15 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       token,
       params?.id as string
     );
+    const trackAudioAnalysis = await getTrackAudioAnalysis(token, params?.id as string);
+    console.timeEnd('start');
     return {
       props: {
         trackData: track,
         artists: detailedArtists,
         audioFeatures: trackAudioFeatures,
-        artistsTopTracks: artistsTopTracks
+        artistsTopTracks: artistsTopTracks,
+        audioAnalysis: trackAudioAnalysis
       },
     };
   } catch (error) {

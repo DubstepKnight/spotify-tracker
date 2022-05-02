@@ -1,7 +1,7 @@
 import { AccessToken } from '../types';
 
-export const getTrackAudioFeatures = async (token: AccessToken, trackId: string) => {
-  const res = await fetch(`${process.env.SPOTIFY_BASE_URL}/audio-features/${trackId}`, {
+export const getTrackAudioAnalysis = async (token: AccessToken, trackId: string) => {
+  const res = await fetch(`${process.env.SPOTIFY_BASE_URL}/audio-analysis/${trackId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
