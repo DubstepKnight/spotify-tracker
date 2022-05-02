@@ -63,7 +63,6 @@ const Popularity: React.FC<IPopularity> = ({ currentTrack, artistsTopTracks }) =
         </Popover>
       </Group>
       <PopulartiyTable currentTrack={currentTrack} artistsTopTracks={artistsTopTracks} />
-      {/* <Progress color={'green'} value={popularity} radius='lg' size={'lg'} /> */}
     </Stack>
   );
 };

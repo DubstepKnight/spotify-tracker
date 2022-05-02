@@ -2,13 +2,14 @@ import { SimpleGrid } from '@mantine/core';
 import React from 'react';
 import { AudioFeatures } from '../../types';
 import Popularity from './Popularity/Popularity';
-import TrackCharactertistics from './TrackCharactertistics/TrackCharacteristics';
+import TrackCharactertistics from './TrackFeatures/TrackFeatures';
 
 interface ICoolData {
   currentTrack: any;
   name: string;
   audioFeatures: AudioFeatures;
   artistsTopTracks: any[];
+  audioAnalysis: any;
 }
 
 const CoolData: React.FC<ICoolData> = ({
@@ -16,6 +17,7 @@ const CoolData: React.FC<ICoolData> = ({
   audioFeatures,
   name,
   artistsTopTracks,
+  // audioAnalysis
 }) => {
 
   return (

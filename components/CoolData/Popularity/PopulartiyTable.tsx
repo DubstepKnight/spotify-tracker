@@ -17,7 +17,7 @@ const PopulartiyTable: React.FC<IPopularityTable> = ({
   );
 
   return (
-    <Table>
+    <Table striped highlightOnHover verticalSpacing={'sm'}>
       <thead>
         <tr>
           <th> # </th>
@@ -43,10 +43,7 @@ const PopulartiyTable: React.FC<IPopularityTable> = ({
           );
         })}
         {!isInTopTen && (
-          <tr
-            key={currentTrack?.id}
-            style={{ backgroundColor: 'green' }}
-          >
+          <tr key={currentTrack?.id} style={{ backgroundColor: 'green' }}>
             <td> ? </td>
             <td> {currentTrack?.name} </td>
             <td> {currentTrack?.popularity} </td>

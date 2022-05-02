@@ -13,12 +13,12 @@ const MODE_DESCRIPTION =
 const TEMPO_DESCRIPTION =
   'The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.';
 
-interface ITrackCharts {
+interface ITrackFeatures {
   audioFeatures: AudioFeatures;
   songName: string;
 }
 
-const TrackCharacteristics: React.FC<ITrackCharts> = ({
+const TrackFeatures: React.FC<ITrackFeatures> = ({
   audioFeatures,
   songName,
 }) => {
@@ -26,7 +26,7 @@ const TrackCharacteristics: React.FC<ITrackCharts> = ({
   return (
     <Stack spacing={'xl'} >
       <Title order={2} style={{ color: 'white' }} >
-        Track characteristics
+        Track features
       </Title>
       <Group position='apart' mb={'xl'} >
         {audioFeatures.key && (
@@ -47,4 +47,4 @@ const TrackCharacteristics: React.FC<ITrackCharts> = ({
   );
 };
 
-export default TrackCharacteristics;
+export default TrackFeatures;

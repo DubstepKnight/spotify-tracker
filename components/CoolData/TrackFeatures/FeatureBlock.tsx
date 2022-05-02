@@ -15,7 +15,7 @@ const FeatureBlock: React.FC<IFeatureBlock> = ({ name, value, description }) => 
   return (
     <Stack spacing={'xl'}>
       <Group spacing={'xs'} >
-        <Title order={3} style={{ color: ' white' }} align={'center'}>
+        <Title order={3} style={{ color: 'lightgray' }} align={'left'}>
           {name}
         </Title>
         <Popover
