@@ -1,0 +1,16 @@
+.track {
+  color: white;
+}
+
+.this_track {
+  background-color: white !important;
+  color: black;
+}
+
+.track td:nth-child(3) {
+  text-align: end;
+}
+
+.this_track td:nth-child(3) {
+  text-align: end;
+}

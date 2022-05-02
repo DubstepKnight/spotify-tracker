@@ -1,4 +1,5 @@
 import { Table } from '@mantine/core';
+import styles from './PopularityTable.module.css'
 import React from 'react';
 
 interface IPopularityTable {
@@ -22,7 +23,7 @@ const PopulartiyTable: React.FC<IPopularityTable> = ({
         <tr>
           <th> # </th>
           <th> Track </th>
-          <th> Popularity index </th>
+          <th style={{ textAlign: 'end' }}> Popularity index </th>
         </tr>
       </thead>
       <tbody>
@@ -30,23 +31,23 @@ const PopulartiyTable: React.FC<IPopularityTable> = ({
           return (
             <tr
               key={topTrack?.id}
-              style={
-                topTrack?.id === currentTrack.id
-                  ? { backgroundColor: 'green' }
-                  : { backgroundColor: 'inherit' }
-              }
+              className={topTrack?.id === currentTrack.id ? styles.this_track : styles.track}
             >
               <td> {index + 1} </td>
               <td> {topTrack?.name} </td>
-              <td> {topTrack?.popularity} </td>
+              <td>
+                <strong> {topTrack?.popularity} </strong>
+              </td>
             </tr>
           );
         })}
         {!isInTopTen && (
-          <tr key={currentTrack?.id} style={{ backgroundColor: 'green' }}>
+          <tr key={currentTrack?.id} className={styles.this_track}>
             <td> ? </td>
             <td> {currentTrack?.name} </td>
-            <td> {currentTrack?.popularity} </td>
+            <td>
+              <strong> {currentTrack?.popularity} </strong>
+            </td>
           </tr>
         )}
       </tbody>

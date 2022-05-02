@@ -1,10 +1,10 @@
-import { Footer } from '@mantine/core';
+import { Footer, Text } from '@mantine/core';
 import React from 'react'
 
 const CustomFooter: React.FC = () => {
   return (
     <Footer height={60} p="md">
-      Application footer
+      <Text color={'white'} > Application footer </Text>
     </Footer>
   )
 }

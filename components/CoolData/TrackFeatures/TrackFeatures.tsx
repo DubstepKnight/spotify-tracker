@@ -28,7 +28,7 @@ const TrackFeatures: React.FC<ITrackFeatures> = ({
       <Title order={2} style={{ color: 'white' }} >
         Track features
       </Title>
-      <Group position='apart' mb={'xl'} >
+      <Group position='apart' spacing={'xl'} mb={'xl'} >
         {audioFeatures.key && (
           <FeatureBlock value={audioFeatures?.key} name={'Key'} description={KEY_DESCRIPTION} />
         )}
