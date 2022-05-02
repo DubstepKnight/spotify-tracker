@@ -1,8 +1,4 @@
-type AccessToken = {
-  access_token: string;
-  token_type: string;
-  expires_in: number;
-}
+import { AccessToken } from '../types';
 
 export const getTrackData = async (token: AccessToken, trackId: string) => {
   const res = await fetch(`${process.env.SPOTIFY_BASE_URL}/tracks/${trackId}?market=FI`, {

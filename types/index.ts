@@ -1,3 +1,4 @@
 import { AudioFeatures } from './audioFeatures';
+import { AccessToken } from './accessToken';
 
-export type { AudioFeatures };
+export type { AudioFeatures, AccessToken };
