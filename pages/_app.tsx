@@ -10,8 +10,10 @@ import {
 import { useState } from 'react';
 import Head from 'next/head';
 import { Footer, Header } from '../components';
+import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
   const [colorScheme, setColorScheme] =
     useState<ColorScheme>('dark');
   const toggleColorScheme = (value?: ColorScheme) =>
@@ -50,7 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           })}
         >
           <Container size={'xl'} px={0} >
-            <Component {...pageProps} />
+            <Component {...pageProps} key={router.asPath} />
           </Container>
         </AppShell>
       </MantineProvider>
