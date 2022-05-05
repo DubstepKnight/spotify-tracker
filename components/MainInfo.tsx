@@ -73,8 +73,8 @@ const MainInfo: React.FC<IMainInfo> = ({
             Explicit
           </Badge>
         )}
-        <audio controls>
-          <source src={audioPreview} type={'audio/mpeg'} />
+        <audio controls className={'preview-audio-player'} >
+          <source src={audioPreview} type={'audio/mp3'} />
         </audio>
       </Stack>
     </Group>

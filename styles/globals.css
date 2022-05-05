@@ -21,3 +21,7 @@ a {
   --light-bg-color: white;
   --dark-bg-color: #191414;
 }
+
+.preview-audio-player::-webkit-media-controls-panel {
+  background-color: var(--primary-color); 
+}
