@@ -1,4 +1,4 @@
-import { Container, Divider, Space } from '@mantine/core';
+import { Container, Space } from '@mantine/core';
 import { GetServerSideProps } from 'next';
 import type { NextPage } from 'next';
 import { CoolData, MainInfo } from '../../components';
@@ -6,17 +6,16 @@ import { getToken } from '../../requests/getToken';
 import { getTrackData } from '../../requests/getTrackData';
 import { getArtist } from '../../requests/getArtist';
 import { getTrackAudioFeatures } from '../../requests/getTrackAudioFeatures';
-import { AudioFeatures } from '../../types';
+import { AccessToken, AudioFeatures } from '../../types';
 import { getArtistsTopTracks } from '../../requests/getArtistsTopTracks';
-// import { getTrackAudioAnalysis } from '../../requests/getAudioAnalysis';
 
 interface ITrackPage {
   trackData: any;
-  artists: any;
   audioFeatures: AudioFeatures;
   error: Error;
   artistsTopTracks: any[];
   audioAnalysis?: any;
+  artists: any[];
 }
 
 const TrackPage: NextPage<ITrackPage> = ({
@@ -25,7 +24,6 @@ const TrackPage: NextPage<ITrackPage> = ({
   error,
   audioFeatures,
   artistsTopTracks,
-  audioAnalysis,
 }) => {
   if (error) {
     return <div>{error.message}</div>;
@@ -43,12 +41,11 @@ const TrackPage: NextPage<ITrackPage> = ({
       />
       <Space h={'lg'} />
       <CoolData
-        markets={trackData.available_markets}
+        artists={artists}
         currentTrack={trackData}
         name={trackData.name}
         audioFeatures={audioFeatures}
         artistsTopTracks={artistsTopTracks}
-        audioAnalysis={audioAnalysis}
       />
     </Container>
   );
@@ -56,15 +53,15 @@ const TrackPage: NextPage<ITrackPage> = ({
 
 export default TrackPage;
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params, query }) => {
   try {
     const token = await getToken();
     const trackData = await getTrackData(token, params?.id as string);
     const { artists, ...track } = trackData;
-    const artistPromises = artists.map((artist: any) =>
+    const artistPromises = artists?.map((artist: any) =>
       getArtist(token, artist.id)
     );
-    const artistsTopTracksPromises = artists.map((artist: any) =>
+    const artistsTopTracksPromises = artists?.map((artist: any) =>
       getArtistsTopTracks(token, artist.id)
     );
     const detailedArtists = await Promise.all(artistPromises);
@@ -79,7 +76,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
         artists: detailedArtists,
         audioFeatures: trackAudioFeatures,
         artistsTopTracks: artistsTopTracks,
-        // audioAnalysis: trackAudioAnalysis
       },
     };
   } catch (error) {
