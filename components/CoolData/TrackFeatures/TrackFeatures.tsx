@@ -1,4 +1,4 @@
-import { Group, Stack, Title } from '@mantine/core';
+import { Grid, Group, SimpleGrid, Stack, Title } from '@mantine/core';
 import React from 'react';
 import { AudioFeatures } from '../../../types';
 import FeatureBlock from './FeatureBlock';
@@ -22,27 +22,55 @@ const TrackFeatures: React.FC<ITrackFeatures> = ({
   audioFeatures,
   songName,
 }) => {
-
   return (
-    <Stack spacing={'xl'} >
-      <Title order={2} style={{ color: 'white' }} >
+    <Stack spacing={'xl'}>
+      <Title order={2} style={{ color: 'white' }}>
         Track features
       </Title>
-      <Group position='apart' spacing={'xl'} mb={'xl'} >
-        {audioFeatures.key && (
-          <FeatureBlock value={audioFeatures?.key} name={'Key'} description={KEY_DESCRIPTION} />
-        )}
-        {audioFeatures.loudness && (
-          <FeatureBlock value={audioFeatures?.loudness} name={'Loudness'} description={LOUDNESS_DESCRIPTION} />
-        )}
-        {audioFeatures.mode && (
-          <FeatureBlock value={audioFeatures?.mode} name={'Mode'} description={MODE_DESCRIPTION} />
-        )}
-        {audioFeatures.tempo && (
-          <FeatureBlock value={audioFeatures?.tempo} name={'Tempo'} description={TEMPO_DESCRIPTION} />
-        )}
-      </Group>
-      <TrackRadarChart {...audioFeatures} songName={songName} />
+      <Grid align='flex-start' gutter={'xl'} mb={'xl'}>
+        <Grid.Col md={10}>
+          <TrackRadarChart {...audioFeatures} songName={songName} />
+        </Grid.Col>
+        <Grid.Col md={2}>
+          <SimpleGrid
+            spacing={'xl'}
+            breakpoints={[
+              { maxWidth: 1000, cols: 4 },
+              { maxWidth: 600, cols: 3 },
+              { maxWidth: 500, cols: 2 },
+            ]}
+          >
+            {audioFeatures.key && (
+              <FeatureBlock
+                value={audioFeatures?.key}
+                name={'Key'}
+                description={KEY_DESCRIPTION}
+              />
+            )}
+            {audioFeatures.loudness && (
+              <FeatureBlock
+                value={audioFeatures?.loudness}
+                name={'Loudness'}
+                description={LOUDNESS_DESCRIPTION}
+              />
+            )}
+            {audioFeatures.mode && (
+              <FeatureBlock
+                value={audioFeatures?.mode}
+                name={'Mode'}
+                description={MODE_DESCRIPTION}
+              />
+            )}
+            {audioFeatures.tempo && (
+              <FeatureBlock
+                value={audioFeatures?.tempo}
+                name={'Tempo'}
+                description={TEMPO_DESCRIPTION}
+              />
+            )}
+          </SimpleGrid>
+        </Grid.Col>
+      </Grid>
     </Stack>
   );
 };

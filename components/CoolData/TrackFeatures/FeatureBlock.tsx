@@ -1,6 +1,6 @@
 import { ActionIcon, Group, Popover, Stack, Text, Title } from '@mantine/core';
 import React from 'react';
-import { InfoCircle } from 'tabler-icons-react';
+import { BorderRadius, InfoCircle } from 'tabler-icons-react';
 
 interface IFeatureBlock {
   name: string;
@@ -8,14 +8,24 @@ interface IFeatureBlock {
   description: string;
 }
 
-const FeatureBlock: React.FC<IFeatureBlock> = ({ name, value, description }) => {
-
+const FeatureBlock: React.FC<IFeatureBlock> = ({
+  name,
+  value,
+  description,
+}) => {
   const [progressInfo, setProgressInfo] = React.useState<boolean>(false);
 
   return (
-    <Stack spacing={'xl'}>
-      <Group spacing={'xs'} >
-        <Title order={3} style={{ color: 'lightgray' }} align={'left'}>
+    <Stack
+      spacing={'xl'}
+      sx={(theme) => ({
+        backgroundColor: theme.colors.gray[9],
+        borderRadius: '8px',
+        padding: '8px 12px',
+      })}
+    >
+      <Group spacing={'xs'} align={'flex-start'}>
+        <Title order={5} style={{ color: 'lightgray' }} align={'left'}>
           {name}
         </Title>
         <Popover
@@ -35,12 +45,10 @@ const FeatureBlock: React.FC<IFeatureBlock> = ({ name, value, description }) => 
             </ActionIcon>
           }
         >
-          <Text size='sm' >
-            {description}
-          </Text>
+          <Text size='sm'>{description}</Text>
         </Popover>
       </Group>
-      <Title order={4} style={{ color: ' white' }} align={'center'}>
+      <Title order={4} style={{ color: ' white' }} align={'left'}>
         {value}
       </Title>
     </Stack>

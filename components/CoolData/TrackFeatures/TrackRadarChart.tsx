@@ -29,7 +29,7 @@ type ITrackRadarChart = Pick<
   | 'liveness'
   | 'speechiness'
   | 'valence'
-> & { songName: string }
+> & { songName: string };
 
 const TrackRadarChart: React.FC<ITrackRadarChart> = ({
   acousticness,
@@ -39,40 +39,39 @@ const TrackRadarChart: React.FC<ITrackRadarChart> = ({
   liveness,
   speechiness,
   valence,
-  songName
+  songName,
 }) => {
-
   const options = {
     legend: {
       position: 'top',
       labels: {
-        fontColor: 'white'
-      }
+        fontColor: 'white',
+      },
     },
     title: {
       display: true,
       text: songName,
-      fontColor: 'white'
+      fontColor: 'white',
     },
     scales: {
       r: {
         max: 1,
         pointLabels: {
-          color: 'white'
+          color: 'white',
         },
         ticks: {
           backdropColor: 'transparent',
-          color: 'white'
+          color: 'white',
         },
         angleLines: {
-          color: 'gray'
+          color: 'gray',
         },
         grid: {
-          color: 'gray'
-        }
-      }
-    }
-  }
+          color: 'gray',
+        },
+      },
+    },
+  };
 
   const data = {
     labels: [
@@ -98,12 +97,16 @@ const TrackRadarChart: React.FC<ITrackRadarChart> = ({
         label: songName,
         backgroundColor: 'green',
         borderColor: 'white',
-        borderWidth: 1
+        borderWidth: 1,
       },
     ],
   };
 
-  return <Radar data={data} options={options} />;
+  return (
+    <div style={{ width: '100%' }}>
+      <Radar data={data} options={options} />
+    </div>
+  );
 };
 
 export default TrackRadarChart;
