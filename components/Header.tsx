@@ -1,20 +1,11 @@
-import {
-  ActionIcon,
-  Group,
-  Header,
-  Title,
-} from '@mantine/core';
+import { Group, Header, Title } from '@mantine/core';
 import React from 'react';
 
-const CustomHeader = () => {  
-
+const CustomHeader = () => {
   return (
-    <Header height={60} p='md'>
+    <Header height={60} p='md' className='glassy-background'>
       <Group position='apart'>
-        <Title
-          order={2}
-          style={{ color: 'white' }}
-        >
+        <Title order={2} style={{ color: 'white' }}>
           Spotifire!
         </Title>
       </Group>
