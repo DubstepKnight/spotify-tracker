@@ -40,8 +40,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <AppShell
           padding={'md'}
+          fixed={true}
           header={<Header />}
-          footer={<Footer />}
           styles={(theme) => ({
             main: {
               backgroundColor:
