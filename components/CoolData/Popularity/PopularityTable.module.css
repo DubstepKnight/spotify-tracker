@@ -14,3 +14,7 @@
 .this_track td:nth-child(3) {
   text-align: end;
 }
+
+.track td a:hover {
+  color: var(--primary-color);
+}
