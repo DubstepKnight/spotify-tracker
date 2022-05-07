@@ -26,8 +26,8 @@ const MainInfo: React.FC<IMainInfo> = ({
       <Image
         alt={`${album.name}'s album cover`}
         src={url}
-        width={width}
-        height={height}
+        width={290}
+        height={290}
         styles={{
           imageWrapper: {
             boxShadow: '0 4px 60px rgb(255 255 255 / 40%)',

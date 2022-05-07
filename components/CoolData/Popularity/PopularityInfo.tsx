@@ -1,5 +1,6 @@
 import {
   ActionIcon,
+  Center,
   Group,
   Popover,
   RingProgress,
@@ -19,7 +20,7 @@ const PopularityInfo: React.FC<IPopularityInfo> = ({ popularity }) => {
 
   return (
     <div>
-      <Group spacing={'xs'}>
+      <Group spacing={'xs'} >
         <Title order={3} style={{ color: 'white' }}>
           Popularity
         </Title>
@@ -59,22 +60,24 @@ const PopularityInfo: React.FC<IPopularityInfo> = ({ popularity }) => {
           </Text>
         </Popover>
       </Group>
-      <RingProgress
-        label={
-          <Text
-            size='xl'
-            weight={700}
-            align='center'
-            color={'white'}
-          >
-            {popularity}
-          </Text>
-        }
-        size={300}
-        thickness={60}
-        roundCaps={true}
-        sections={[{ value: popularity, color: 'white' }]}
-      />
+      <Center>
+        <RingProgress
+          label={
+            <Text
+              size='xl'
+              weight={700}
+              align='center'
+              color={'white'}
+            >
+              {popularity}
+            </Text>
+          }
+          size={320}
+          thickness={60}
+          roundCaps={true}
+          sections={[{ value: popularity, color: 'white' }]}
+        />
+      </Center>
     </div>
   );
 };

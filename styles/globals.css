@@ -24,4 +24,5 @@ a {
 
 .preview-audio-player::-webkit-media-controls-panel {
   background-color: var(--primary-color); 
+  width: 290px;
 }
