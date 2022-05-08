@@ -6,7 +6,7 @@ import { getToken } from '../../requests/getToken';
 import { getTrackData } from '../../requests/getTrackData';
 import { getArtist } from '../../requests/getArtist';
 import { getTrackAudioFeatures } from '../../requests/getTrackAudioFeatures';
-import { AccessToken, AudioFeatures } from '../../types';
+import { AudioFeatures } from '../../types';
 import { getArtistsTopTracks } from '../../requests/getArtistsTopTracks';
 
 interface ITrackPage {
@@ -53,7 +53,9 @@ const TrackPage: NextPage<ITrackPage> = ({
 
 export default TrackPage;
 
-export const getServerSideProps: GetServerSideProps = async ({ params, query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+}) => {
   try {
     const token = await getToken();
     const trackData = await getTrackData(token, params?.id as string);

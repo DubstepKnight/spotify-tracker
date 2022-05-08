@@ -56,7 +56,6 @@ const PopularityTable: React.FC<IPopularityTable> = ({
         <tbody>
           {artistsTopTracks[+currentArtist].tracks.map(
             (topTrack: any, index: number) => {
-              console.log('topTrack: ', topTrack);
               return (
                 <tr
                   key={topTrack?.id}
