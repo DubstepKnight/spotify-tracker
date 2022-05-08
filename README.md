@@ -8,13 +8,7 @@ Steps to start:
 2. Get Spotify Client ID and API secret on Spotify's website.
 3. Run `cp .env.example .env.local`
 4. Assign API secret and Client ID you got from Spotify in the newly created `.env.local` file
-5. Run:
-
-```bash
-docker-compose up
-```
-
-command
+5. Run: `docker-compose up`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
