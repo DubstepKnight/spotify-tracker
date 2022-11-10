@@ -1,38 +1,47 @@
-import axios from 'axios';
-import { GetServerSideProps, NextPage } from 'next';
-import React from 'react';
-import { getAccessToken } from '../requests/getAccessToken';
+import { GetServerSideProps, NextPage } from "next";
+import React from "react";
+import { getAccessToken } from "../requests/getAccessToken";
+import Cookies from "cookies";
 
 interface INice {
   code: string;
   state: string;
 }
 
-const RequestAccessToken: NextPage<INice> = () => {  
-
-  // React.useEffect(() => {
-  //   fetch(`http://localhost:3001`).then((res) => {
-  //     const data = res.text();
-  //     console.log('data: ', data);
-  //   }).catch((err) => {
-  //     console.error(err);
-  //   });
-  // }, [])
-  
-
+const RequestAccessToken: NextPage<INice> = ({ code, state }) => {
   return <div>RequestAccessToken</div>;
 };
 
 export default RequestAccessToken;
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  req,
+  res,
+}) => {
   try {
     const { code, state } = query;
-    const response = await getAccessToken(state as string, code as string);
+    const { jwt, expires_in } = await getAccessToken(
+      state as string,
+      code as string
+    );
+
+    const cookies = new Cookies(req, res);
+
+    cookies.set("access-token", jwt, {
+      httpOnly: true,
+      expires: new Date(new Date().getTime() + 1000 * expires_in),
+    });
+
+    cookies.set("is-logged-in", "true", {
+      httpOnly: false,
+      expires: new Date(new Date().getTime() + 1000 * expires_in),
+    });
     return {
-      props: {
-        code: code,
-        state: state
+      // TODO: redirect to /profile
+      redirect: {
+        destination: "/",
+        permanent: false,
       },
     };
   } catch (error) {
