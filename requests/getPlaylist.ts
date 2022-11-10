@@ -1,21 +1,20 @@
-import { AccessToken } from '../types';
-
-export const getPlaylist = async (
-  token: AccessToken,
-  playlistId: string,
-) => {
-  const res = await fetch(
-    `${process.env.SPOTIFY_BASE_URL}/playlists/${playlistId}?${new URLSearchParams({
-      fields: 'images,desctiption,images,name,tracks(name,artists,href,album(name,images,))'
-    })}`,
-    {
-      method: 'GET',
+export const getPlaylist = async (playlistId: string, token?: string) => {
+  try {
+    // const res = await fetch(`http://192.168.1.253:3001/playlists/${playlistId}`, {
+    const res = await fetch(`http://10.101.7.9:3001/playlists/${playlistId}`, {
+      method: "GET",
+      credentials: "include",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        Authorization: 'Bearer ' + token.access_token,
+        Cookie: `access-token=${token}`,
+        "Access-Control-Allow-Credentials": "true",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
       },
-    }
-  );
-  const data = await res.json();
-  return data;
+    });
+    const data = await res.json();
+    console.log("data: ", data);
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
 };
