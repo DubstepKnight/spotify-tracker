@@ -1,24 +1,37 @@
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
 import {
   AppShell,
   ColorScheme,
   ColorSchemeProvider,
   Container,
   MantineProvider,
-} from '@mantine/core';
-import { useState } from 'react';
-import Head from 'next/head';
-import { Footer, Header } from '../components';
-import { useRouter } from 'next/router';
+} from "@mantine/core";
+import { useState, useEffect } from "react";
+import Head from "next/head";
+import { Header } from "../components";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const [colorScheme, setColorScheme] =
-    useState<ColorScheme>('dark');
+  const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
   const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  const logout = () => {
+    setIsLoggedIn(false);
+    Cookies.remove("is-logged-in");
+  };
+
+  useEffect(() => {
+    const cookie = Cookies.get("is-logged-in");
+    if (cookie === "true") {
+      setIsLoggedIn(true);
+    }
+  }, [isLoggedIn]);
   return (
     <ColorSchemeProvider
       colorScheme={colorScheme}
@@ -28,9 +41,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         theme={{
           colorScheme: colorScheme,
           colors: {
-            'primary': ['#1DB954', '#1ED760'],
-            'backgroundColor': ['#ffffff', '#191414'],
-          }
+            primary: ["#1DB954", "#1ED760"],
+            backgroundColor: ["#ffffff", "#191414"],
+          },
         }}
       >
         <Head>
@@ -39,19 +52,19 @@ function MyApp({ Component, pageProps }: AppProps) {
           <link rel='icon' href='/favicon.ico' />
         </Head>
         <AppShell
-          padding={'md'}
+          padding={"md"}
           fixed={true}
-          header={<Header />}
+          header={<Header logout={logout} isLoggedIn={isLoggedIn} />}
           styles={(theme) => ({
             main: {
               backgroundColor:
-                theme.colorScheme === 'dark'
+                theme.colorScheme === "dark"
                   ? theme.colors.backgroundColor[1]
                   : theme.colors.backgroundColor[0],
             },
           })}
         >
-          <Container size={'xl'} px={0} >
+          <Container size={"xl"} px={0}>
             <Component {...pageProps} key={router.asPath} />
           </Container>
         </AppShell>
