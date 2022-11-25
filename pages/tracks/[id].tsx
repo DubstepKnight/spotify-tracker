@@ -1,13 +1,13 @@
-import { Container, Space } from '@mantine/core';
-import { GetServerSideProps } from 'next';
-import type { NextPage } from 'next';
-import { CoolData, MainInfo } from '../../components';
-import { getToken } from '../../requests/getToken';
-import { getTrackData } from '../../requests/getTrackData';
-import { getArtist } from '../../requests/getArtist';
-import { getTrackAudioFeatures } from '../../requests/getTrackAudioFeatures';
-import { AudioFeatures } from '../../types';
-import { getArtistsTopTracks } from '../../requests/getArtistsTopTracks';
+import { Container, Space, Text } from "@mantine/core";
+import { GetServerSideProps } from "next";
+import type { NextPage } from "next";
+import { CoolData, MainInfo } from "../../components";
+import { getTrackData } from "../../requests/getTrackData";
+import { getArtists } from "../../requests/getArtists";
+import { getTrackAudioFeatures } from "../../requests/getTrackAudioFeatures";
+import { AudioFeatures } from "../../types";
+import { getArtistsTopTracks } from "../../requests/getArtistsTopTracks";
+import Cookies from "cookies";
 
 interface ITrackPage {
   trackData: any;
@@ -39,7 +39,7 @@ const TrackPage: NextPage<ITrackPage> = ({
         name={trackData.name}
         audioPreview={trackData.preview_url}
       />
-      <Space h={'lg'} />
+      <Space h={"lg"} />
       <CoolData
         artists={artists}
         currentTrack={trackData}
@@ -54,28 +54,40 @@ const TrackPage: NextPage<ITrackPage> = ({
 export default TrackPage;
 
 export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
   params,
 }) => {
   try {
-    const token = await getToken();
+    console.time("getServerSideProps");
+    const cookies = new Cookies(req, res);
+    const token = cookies.get("access-token") as string;
+    const isLoggedInToken = cookies.get("is-logged-in") as string;
+    if (!token || isLoggedInToken !== "true") {
+      return {
+        redirect: {
+          destination: "/please_login",
+          permanent: false,
+        },
+      };
+    }
     const trackData = await getTrackData(token, params?.id as string);
     const { artists, ...track } = trackData;
-    const artistPromises = artists?.map((artist: any) =>
-      getArtist(token, artist.id)
-    );
+    const artistsIds = artists.map((artist: any) => artist.id);
+    const detailedArtists = await getArtists(token, artistsIds);
     const artistsTopTracksPromises = artists?.map((artist: any) =>
       getArtistsTopTracks(token, artist.id)
     );
-    const detailedArtists = await Promise.all(artistPromises);
     const artistsTopTracks = await Promise.all(artistsTopTracksPromises);
     const trackAudioFeatures = await getTrackAudioFeatures(
       token,
       params?.id as string
     );
+    console.timeEnd("getServerSideProps");
     return {
       props: {
         trackData: track,
-        artists: detailedArtists,
+        artists: detailedArtists.artists,
         audioFeatures: trackAudioFeatures,
         artistsTopTracks: artistsTopTracks,
       },

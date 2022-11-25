@@ -33,10 +33,19 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     const cookies = new Cookies(req, res);
 
     const token = cookies.get("access-token") as string;
+    const isLoggedInToken = cookies.get("is-logged-in") as string;
     const playlist = await getPlaylist(
       "0xb9d1i8oSqjvwepgejI9m?si=YEVUV_E3R_O5A3c4xRWNpA",
       token
     );
+    if (!token || isLoggedInToken !== "true") {
+      return {
+        redirect: {
+          destination: "/please_login",
+          permanent: false,
+        },
+      };
+    }
     return {
       props: {
         playlist: playlist,
