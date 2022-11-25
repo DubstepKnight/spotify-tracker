@@ -1,22 +1,13 @@
 import { Button, Group, Header, Title } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
-import Cookies from "js-cookie";
 
-const CustomHeader = () => {
-  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
+interface ICustomHeader {
+  isLoggedIn: boolean;
+  logout: () => void;
+}
 
-  const logout = () => {
-    setIsLoggedIn(false);
-    Cookies.remove("is-logged-in");
-  };
-
-  React.useEffect(() => {
-    const cookie = Cookies.get("is-logged-in");
-    if (cookie === "true") {
-      setIsLoggedIn(true);
-    }
-  }, []);
+const CustomHeader: React.FC<ICustomHeader> = ({ isLoggedIn, logout }) => {
 
   return (
     <Header height={60} p='md' className='glassy-background'>

@@ -3,12 +3,7 @@ import React from "react";
 import { getAccessToken } from "../requests/getAccessToken";
 import Cookies from "cookies";
 
-interface INice {
-  code: string;
-  state: string;
-}
-
-const RequestAccessToken: NextPage<INice> = ({ code, state }) => {
+const RequestAccessToken: NextPage = () => {
   return <div>RequestAccessToken</div>;
 };
 

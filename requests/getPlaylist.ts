@@ -11,7 +11,6 @@ export const getPlaylist = async (playlistId: string, token?: string) => {
       },
     });
     const data = await res.json();
-    console.log("data: ", data);
     return data;
   } catch (error) {
     console.error(error);

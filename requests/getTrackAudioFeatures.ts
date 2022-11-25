@@ -1,4 +1,9 @@
-export const getTrackAudioFeatures = async (token: string, trackId: string) => {
+import { AudioFeatures } from "../types";
+
+export const getTrackAudioFeatures = async (
+  token: string,
+  trackId: string
+): Promise<AudioFeatures> => {
   try {
     // const res = await fetch(`http://192.168.1.253:3001/tracks/${trackId}?${new URLSearchParams({
     const res = await fetch(
@@ -17,6 +22,6 @@ export const getTrackAudioFeatures = async (token: string, trackId: string) => {
     return data;
   } catch (error) {
     console.error(error);
-    return error;
+    throw error;
   }
 };

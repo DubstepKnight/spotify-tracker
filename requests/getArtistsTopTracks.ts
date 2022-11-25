@@ -1,4 +1,9 @@
-export const getArtistsTopTracks = async (token: string, artistId: string) => {
+import { Artist } from "../types/artist";
+
+export const getArtistsTopTracks = async (
+  token: string,
+  artistId: string
+): Promise<Artist> => {
   try {
     // const res = await fetch(`http://192.168.1.253:3001/tracks/${trackId}?${new URLSearchParams({
     const res = await fetch(
@@ -17,16 +22,6 @@ export const getArtistsTopTracks = async (token: string, artistId: string) => {
     return data;
   } catch (error) {
     console.error(error);
-    return error;
+    throw error;
   }
-  // const res = await fetch(`${process.env.SPOTIFY_BASE_URL}/artists/${artistId}/top-tracks?market=FI`, {
-  //   method: 'GET',
-  //   headers: {
-  //     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-  //     'Authorization':
-  //       'Bearer ' + token.access_token
-  //   }
-  // });
-  // const data = await res.json();
-  // return data;
 };
