@@ -1,8 +1,9 @@
+import { IP_ADDRESS } from "../pages/_app";
+
 export const getArtists = async (token: string, artistIds: string[]) => {
   try {
-    // const res = await fetch(`http://192.168.1.253:3001/tracks/${trackId}?${new URLSearchParams({
     const res = await fetch(
-      `http://10.101.7.9:3001/artists/${artistIds.join(",")}`,
+      `http://${IP_ADDRESS}:3001/artists/${artistIds.join(",")}`,
       {
         method: "GET",
         credentials: "include",

@@ -1,6 +1,7 @@
+import { IP_ADDRESS } from "../pages/_app";
+
 export const getProfile = async (token: string) => {
-  // const res = await fetch(`http://192.168.1.253:3001/user/me`, {
-  const res = await fetch(`http://10.101.7.9:3001/user/me`, {
+  const res = await fetch(`http://${IP_ADDRESS}:3001/user/me`, {
     method: "GET",
     credentials: "include",
     headers: {

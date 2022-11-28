@@ -1,3 +1,4 @@
+import { IP_ADDRESS } from "../pages/_app";
 import { Artist } from "../types/artist";
 
 export const getArtistsTopTracks = async (
@@ -5,9 +6,8 @@ export const getArtistsTopTracks = async (
   artistId: string
 ): Promise<Artist> => {
   try {
-    // const res = await fetch(`http://192.168.1.253:3001/tracks/${trackId}?${new URLSearchParams({
     const res = await fetch(
-      `http://10.101.7.9:3001/artists/${artistId}/top-tracks`,
+      `http://${IP_ADDRESS}:3001/artists/${artistId}/top-tracks`,
       {
         method: "GET",
         credentials: "include",

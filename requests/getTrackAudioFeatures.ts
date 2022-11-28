@@ -1,3 +1,4 @@
+import { IP_ADDRESS } from "../pages/_app";
 import { AudioFeatures } from "../types";
 
 export const getTrackAudioFeatures = async (
@@ -5,9 +6,8 @@ export const getTrackAudioFeatures = async (
   trackId: string
 ): Promise<AudioFeatures> => {
   try {
-    // const res = await fetch(`http://192.168.1.253:3001/tracks/${trackId}?${new URLSearchParams({
     const res = await fetch(
-      `http://10.101.7.9:3001/tracks/track-audio-features/${trackId}`,
+      `http://${IP_ADDRESS}:3001/tracks/track-audio-features/${trackId}`,
       {
         method: "GET",
         credentials: "include",
