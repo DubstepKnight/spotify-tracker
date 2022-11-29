@@ -8,13 +8,14 @@ export const getPlaylist = async (playlistId: string, token?: string) => {
         method: "GET",
         credentials: "include",
         headers: {
-          Cookie: `access-token=${token}`,
+          Authorization: `Bearer ${token}`,
           "Access-Control-Allow-Credentials": "true",
           "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         },
       }
     );
     const data = await res.json();
+    console.log("data", data);
     return data;
   } catch (error) {
     console.error(error);

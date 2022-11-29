@@ -1,13 +1,13 @@
 import { IP_ADDRESS } from "../pages/_app";
-import { AudioFeatures } from "../types";
+import { AudioAnalysis } from "../types/audioAnalysis";
 
-export const getTrackAudioFeatures = async (
+export const getTrackAudioAnalysis = async (
   token: string,
   trackId: string
-): Promise<AudioFeatures> => {
+): Promise<AudioAnalysis> => {
   try {
     const res = await fetch(
-      `http://${IP_ADDRESS}:3001/tracks/track-audio-features/${trackId}`,
+      `http://${IP_ADDRESS}:3001/tracks/audio-analysis/${trackId}`,
       {
         method: "GET",
         credentials: "include",

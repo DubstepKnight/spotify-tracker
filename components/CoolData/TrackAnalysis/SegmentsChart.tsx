@@ -7,8 +7,6 @@ interface ISegmentsChart {
 
 const SegmentsChart: React.FC<ISegmentsChart> = ({ segments }) => {
 
-  console.log('egments: ', segments)
-
   return (
     <div>
       <Title> Segments </Title>

@@ -11,6 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { Bar } from '../../../types/audioAnalysis';
 
 ChartJS.register(
   CategoryScale,
@@ -21,18 +22,11 @@ ChartJS.register(
   Legend
 );
 
-type Bar = {
-  start: number;
-  duration: number;
-  confidence: number;
-};
-
 interface IBarsChart {
   bars: Bar[];
 }
 
 const BarsChart: React.FC<IBarsChart> = ({ bars }) => {
-  console.log('bars: ', bars);
 
   const data = {
     labels: bars.map((bar: Bar) => bar.start),

@@ -7,8 +7,6 @@ interface IBeatsChart {
 
 const BeatsChart: React.FC<IBeatsChart> = ({ beats }) => {
 
-  console.log('beats: ', beats)
-
   return (
     <div>
       <Title> Beats </Title>

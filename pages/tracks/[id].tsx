@@ -8,8 +8,11 @@ import { getTrackAudioFeatures } from "../../requests/getTrackAudioFeatures";
 import { AudioFeatures } from "../../types";
 import { getArtistsTopTracks } from "../../requests/getArtistsTopTracks";
 import Cookies from "cookies";
+import { getTrackAudioAnalysis } from "../../requests/getTrackAudioAnalysis";
+import { AudioAnalysis } from "../../types/audioAnalysis";
 
 interface ITrackPage {
+  token: string;
   trackData: any;
   audioFeatures: AudioFeatures;
   error: Error;
@@ -19,6 +22,7 @@ interface ITrackPage {
 }
 
 const TrackPage: NextPage<ITrackPage> = ({
+  token,
   trackData,
   artists,
   error,
@@ -41,6 +45,7 @@ const TrackPage: NextPage<ITrackPage> = ({
       />
       <Space h={"lg"} />
       <CoolData
+        token={token}
         artists={artists}
         currentTrack={trackData}
         name={trackData.name}
@@ -86,6 +91,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     console.timeEnd("getServerSideProps");
     return {
       props: {
+        token: token,
         trackData: track,
         artists: detailedArtists.artists,
         audioFeatures: trackAudioFeatures,

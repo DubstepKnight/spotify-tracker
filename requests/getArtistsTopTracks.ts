@@ -12,7 +12,7 @@ export const getArtistsTopTracks = async (
         method: "GET",
         credentials: "include",
         headers: {
-          Cookie: `access-token=${token}`,
+          Authorization: `Bearer ${token}`,
           "Access-Control-Allow-Credentials": "true",
           "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         },

@@ -7,8 +7,6 @@ interface ITatumsChart {
 
 const TatumsChart: React.FC<ITatumsChart> = ({ tatums }) => {
 
-  console.log('tatums: ', tatums)
-
   return (
     <div>
       <Title> Segments </Title>

@@ -1,7 +1,7 @@
-import { Chip, Chips, Table, Title } from '@mantine/core';
-import styles from './PopularityTable.module.css';
-import React from 'react';
-import Link from 'next/link';
+import { Chip, Chips, Table, Title } from "@mantine/core";
+import styles from "./PopularityTable.module.css";
+import React from "react";
+import Link from "next/link";
 
 interface IPopularityTable {
   artistsTopTracks: any[];
@@ -15,7 +15,7 @@ const PopularityTable: React.FC<IPopularityTable> = ({
   artists,
 }) => {
   const [isInTopTen, setIsInTopTen] = React.useState<boolean>(false);
-  const [currentArtist, setCurrentArtist] = React.useState<string>('0');
+  const [currentArtist, setCurrentArtist] = React.useState<string>("0");
 
   React.useEffect(() => {
     setIsInTopTen(
@@ -27,34 +27,34 @@ const PopularityTable: React.FC<IPopularityTable> = ({
 
   return (
     <div>
-      <Title order={3} style={{ color: 'white' }}>
+      <Title order={3} style={{ color: "white" }}>
         Top 10 tracks
       </Title>
       <Chips
-        color={'green'}
+        color={"green"}
         value={currentArtist}
         onChange={setCurrentArtist}
         multiple={false}
-        my={'lg'}
+        my={"lg"}
       >
         {artists.map((artist: any, index: number) => {
           return (
-            <Chip value={'' + index} key={artist.id}>
+            <Chip value={"" + index} key={artist.id}>
               {artist.name}
             </Chip>
           );
         })}
       </Chips>
-      <Table striped highlightOnHover verticalSpacing={'sm'}>
+      <Table striped highlightOnHover verticalSpacing={"sm"}>
         <thead>
           <tr>
             <th> # </th>
             <th> Track </th>
-            <th style={{ textAlign: 'end' }}> Popularity index </th>
+            <th style={{ textAlign: "end" }}> Popularity index </th>
           </tr>
         </thead>
         <tbody>
-          {artistsTopTracks[+currentArtist].tracks.map(
+          {artistsTopTracks[+currentArtist]?.tracks?.map(
             (topTrack: any, index: number) => {
               return (
                 <tr

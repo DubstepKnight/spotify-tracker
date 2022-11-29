@@ -33,8 +33,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const token = cookies.get("access-token") as string;
   const profile = await getProfile(token);
 
-  console.log("profile: ", profile);
-
   try {
     return {
       props: {

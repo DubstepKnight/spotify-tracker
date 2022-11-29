@@ -1,10 +1,7 @@
-import { Center, Container, Title } from "@mantine/core";
-// import Cookies from "cookies";
-import { GetServerSideProps, NextPage } from "next";
-// import Playlist from "../components/Playlist/Playlist";
-// import { getPlaylist } from "../requests/getPlaylist";
+import { Button, Center, Container, Title } from "@mantine/core";
+import { GetStaticProps, NextPage } from "next";
+import Link from "next/link";
 interface IHome {
-  playlist: any;
   error: Error;
 }
 
@@ -19,6 +16,9 @@ const Home: NextPage<IHome> = ({ error }) => {
         <Title style={{ color: "white" }}>
           Please Login to get all the interesting info!
         </Title>
+        <Link href={"/playlist"} passHref={true}>
+          <Button> Example playlist </Button>
+        </Link>
       </Center>
     </Container>
   );
@@ -26,11 +26,11 @@ const Home: NextPage<IHome> = ({ error }) => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async ({}) => {
+export const getStaticProps: GetStaticProps = async ({}) => {
   try {
     return {
       props: {
-        // playlist: playlist,
+        code: "nothing",
       },
     };
   } catch (error) {
