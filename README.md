@@ -8,7 +8,10 @@ Steps to start:
 2. Get Spotify Client ID and API secret on Spotify's website.
 3. Run `cp .env.example .env.local`
 4. Assign API secret and Client ID you got from Spotify in the newly created `.env.local` file
-5. Run: `docker-compose up`
+5. Run `yarn run install`
+6. Run: `docker-compose up`
+
+It is important to get and assign Spotify API secret and client ID for the application to work
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
