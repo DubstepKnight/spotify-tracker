@@ -1,8 +1,10 @@
 import { Center, Container, Title } from "@mantine/core";
 import Cookies from "cookies";
 import { GetServerSideProps, NextPage } from "next";
-import Playlist from "../components/Playlist/Playlist";
-import { getPlaylist } from "../requests/getPlaylist";
+import Playlist from "../../components/Playlist/Playlist";
+import { getPlaylist } from "../../requests/getPlaylist";
+// import Playlist from "../components/Playlist/Playlist";
+// import { getPlaylist } from "../requests/getPlaylist";
 
 interface IPlaylistPage {
   playlist: any;
@@ -17,9 +19,7 @@ const PlaylistPage: NextPage<IPlaylistPage> = ({ playlist, error }) => {
   return (
     <Container fluid={true}>
       <Center my={"xl"}>
-        <Title style={{ color: "white" }}>
-          Learn about your favorite tracks!
-        </Title>
+        <Title style={{ color: "white" }}>{playlist.name}</Title>
       </Center>
       <Playlist playlist={playlist} />
     </Container>
@@ -28,16 +28,17 @@ const PlaylistPage: NextPage<IPlaylistPage> = ({ playlist, error }) => {
 
 export default PlaylistPage;
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  params,
+}) => {
   try {
     const cookies = new Cookies(req, res);
 
     const token = cookies.get("access-token") as string;
     const isLoggedInToken = cookies.get("is-logged-in") as string;
-    const playlist = await getPlaylist(
-      "0xb9d1i8oSqjvwepgejI9m?si=YEVUV_E3R_O5A3c4xRWNpA",
-      token
-    );
+    const playlist = await getPlaylist(params?.id as string, token);
     if (!token || isLoggedInToken !== "true") {
       return {
         redirect: {
