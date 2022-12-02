@@ -1,4 +1,4 @@
-import { Chip, Chips, Table, Title } from "@mantine/core";
+import { Chip, Table, Title } from "@mantine/core";
 import styles from "./PopularityTable.module.css";
 import React from "react";
 import Link from "next/link";
@@ -19,7 +19,7 @@ const PopularityTable: React.FC<IPopularityTable> = ({
 
   React.useEffect(() => {
     setIsInTopTen(
-      artistsTopTracks[0].tracks.find((topTrack: any) => {
+      artistsTopTracks[0].tracks?.find((topTrack: any) => {
         return topTrack.id === currentTrack.id;
       })
     );
@@ -30,8 +30,7 @@ const PopularityTable: React.FC<IPopularityTable> = ({
       <Title order={3} style={{ color: "white" }}>
         Top 10 tracks
       </Title>
-      <Chips
-        color={"green"}
+      <Chip.Group
         value={currentArtist}
         onChange={setCurrentArtist}
         multiple={false}
@@ -39,12 +38,12 @@ const PopularityTable: React.FC<IPopularityTable> = ({
       >
         {artists.map((artist: any, index: number) => {
           return (
-            <Chip value={"" + index} key={artist.id}>
+            <Chip value={"" + index} key={artist.id} color={"green"}>
               {artist.name}
             </Chip>
           );
         })}
-      </Chips>
+      </Chip.Group>
       <Table striped highlightOnHover verticalSpacing={"sm"}>
         <thead>
           <tr>

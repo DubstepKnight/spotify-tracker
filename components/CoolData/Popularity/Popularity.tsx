@@ -15,7 +15,11 @@ const Popularity: React.FC<IPopularity> = ({
   artists,
 }) => {
   return (
-    <Grid justify={"space-between"} gutter={"xl"}>
+    <Grid
+      justify={"space-between"}
+      gutter={"xl"}
+      styles={{ marginTop: "1rem" }}
+    >
       <Grid.Col sm={4}>
         <PopularityInfo popularity={currentTrack.popularity} />
       </Grid.Col>

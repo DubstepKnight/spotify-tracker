@@ -1,8 +1,6 @@
 import { Tabs } from "@mantine/core";
 import React from "react";
-import { AccessToken, AudioFeatures } from "../../types";
 import Popularity from "./Popularity/Popularity";
-import TrackAnalysis from "./TrackAnalysis/TrackAnalysis";
 import TrackFeatures from "./TrackFeatures/TrackFeatures";
 
 interface ICoolData {
@@ -10,33 +8,42 @@ interface ICoolData {
   artists: any[];
   currentTrack: any;
   name: string;
-  audioFeatures: AudioFeatures;
   artistsTopTracks: any[];
 }
 
 const CoolData: React.FC<ICoolData> = ({
   token,
   currentTrack,
-  audioFeatures,
   name,
   artistsTopTracks,
   artists,
 }) => {
   return (
-    <Tabs color={"gray"}>
-      <Tabs.Tab label={"Popularity"}>
+    <Tabs
+      color={"green"}
+      defaultValue={"popularity"}
+      radius={"lg"}
+      keepMounted={true}
+      styles={{ panel: { marginTop: "0.5rem" } }}
+    >
+      <Tabs.List>
+        <Tabs.Tab value='popularity'>Popularity</Tabs.Tab>
+        <Tabs.Tab value='track-features'>Track Features</Tabs.Tab>
+        <Tabs.Tab value='track-analysis'>Track Analysis</Tabs.Tab>
+      </Tabs.List>
+      <Tabs.Panel value={"popularity"}>
         <Popularity
           artists={artists}
           currentTrack={currentTrack}
           artistsTopTracks={artistsTopTracks}
         />
-      </Tabs.Tab>
-      <Tabs.Tab label={"Track Features"}>
-        <TrackFeatures audioFeatures={audioFeatures} songName={name} />
-      </Tabs.Tab>
-      <Tabs.Tab label={"Track Analysis"}>
+      </Tabs.Panel>
+      <Tabs.Panel value={"track-features"}>
+        <TrackFeatures token={token} songName={name} />
+      </Tabs.Panel>
+      {/* <Tabs.Panel value={"track-analysis"}>
         <TrackAnalysis token={token} />
-      </Tabs.Tab>
+      </Tabs.Panel> */}
     </Tabs>
   );
 };

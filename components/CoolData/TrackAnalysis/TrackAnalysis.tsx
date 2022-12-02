@@ -22,7 +22,7 @@ const TrackAnalysis: React.FC<ITrackAnalysis> = ({ token }) => {
 
   React.useEffect(() => {
     const query = router.query;
-    const getStuff = async () => {
+    const fetchTrackAnalysis = async () => {
       const trackAnalysis = await getTrackAudioAnalysis(
         token,
         query.id as string
@@ -30,7 +30,7 @@ const TrackAnalysis: React.FC<ITrackAnalysis> = ({ token }) => {
       setTrackAnalysis(trackAnalysis);
       setIsLoading(false);
     };
-    getStuff();
+    fetchTrackAnalysis();
   }, [token, router]);
 
   if (isLoading) {
