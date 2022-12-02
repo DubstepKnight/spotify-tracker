@@ -16,8 +16,10 @@ const Home: NextPage<IHome> = ({ error }) => {
         <Title style={{ color: "white" }}>
           Please Login to get all the interesting info!
         </Title>
-        <Link href={"/playlist"} passHref={true}>
-          <Button> Example playlist </Button>
+      </Center>
+      <Center>
+        <Link href='/login' passHref={true}>
+          <Button color='blue'>Login</Button>
         </Link>
       </Center>
     </Container>

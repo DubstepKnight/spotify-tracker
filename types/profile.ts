@@ -17,7 +17,7 @@ export type Profile = {
   href: string;
   id: string;
   images: Image[];
-  product: string;
+  product: "open" | "premium" | "free";
   type: string;
   uri: string;
 };

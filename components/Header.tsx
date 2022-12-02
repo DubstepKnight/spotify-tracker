@@ -1,14 +1,13 @@
-import { Button, Group, Header, Title } from "@mantine/core";
+import { Button, Group, Header, Loader, Title } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
 
 interface ICustomHeader {
   isLoggedIn: boolean;
-  logout: () => void;
+  isLoading: boolean;
 }
 
-const CustomHeader: React.FC<ICustomHeader> = ({ isLoggedIn, logout }) => {
-
+const CustomHeader: React.FC<ICustomHeader> = ({ isLoggedIn, isLoading }) => {
   return (
     <Header height={60} p='md' className='glassy-background'>
       <Group position='apart'>
@@ -19,10 +18,16 @@ const CustomHeader: React.FC<ICustomHeader> = ({ isLoggedIn, logout }) => {
             </Title>
           </a>
         </Link>
-        {isLoggedIn ? (
-          <Button color={"red"} onClick={logout}>
-            Logout
+        {isLoading ? (
+          <Button variant='light' color={"gray"}>
+            <Loader color={"green"} size={"sm"} variant={"bars"} />
           </Button>
+        ) : isLoggedIn ? (
+          <Link href={"/me"} passHref={true}>
+            <Button variant='light' color={"gray"}>
+              Profile
+            </Button>
+          </Link>
         ) : (
           <a
             href={"http://localhost:3001/auth/login"}

@@ -24,17 +24,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-
-  const logout = () => {
-    setIsLoggedIn(false);
-    Cookies.remove("is-logged-in");
-  };
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const cookie = Cookies.get("is-logged-in");
     if (cookie === "true") {
       setIsLoggedIn(true);
     }
+    setIsLoading(false);
   }, [isLoggedIn]);
 
   return (
@@ -67,7 +64,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <AppShell
             padding={"md"}
             fixed={true}
-            header={<Header logout={logout} isLoggedIn={isLoggedIn} />}
+            header={<Header isLoading={isLoading} isLoggedIn={isLoggedIn} />}
             styles={(theme) => ({
               main: {
                 backgroundColor:

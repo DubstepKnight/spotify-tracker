@@ -1,6 +1,6 @@
 import { IP_ADDRESS } from "../pages/_app";
 
-export const getProfile = async (token: string) => {
+export const getMyProfile = async (token: string) => {
   try {
     const res = await fetch(`http://${IP_ADDRESS}:3001/user/me`, {
       method: "GET",
