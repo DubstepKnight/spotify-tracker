@@ -14,8 +14,8 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import NextNProgress from "nextjs-progressbar";
 
-export const IP_ADDRESS = "10.101.7.9"; // office IP address
-// const PORT = '192.168.1.253'; // home IP address
+// export const IP_ADDRESS = "10.101.7.9"; // office IP address
+export const IP_ADDRESS = "192.168.1.253"; // home IP address
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -42,6 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         stopDelayMs={200}
         height={8}
         showOnShallow={true}
+        options={{ showSpinner: false }}
       />
       <ColorSchemeProvider
         colorScheme={colorScheme}
