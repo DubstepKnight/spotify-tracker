@@ -1,13 +1,10 @@
 import {
+  Avatar,
   Button,
   Container,
   Divider,
   Flex,
   Group,
-  Header,
-  Image,
-  Navbar,
-  Space,
   Stack,
   Text,
   Title,
@@ -17,8 +14,8 @@ import ClientCookies from "js-cookie";
 import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import { getMyProfile } from "../requests/getMyProfile";
-import { Profile } from "../types";
+import { getMyProfile } from "../../requests/getMyProfile";
+import { Profile } from "../../types";
 
 interface IProfile {
   profile: Profile;
@@ -41,9 +38,8 @@ const MePage: NextPage<IProfile> = ({ profile, error }) => {
     <Container fluid={true}>
       <Flex align={"center"} justify='apart'>
         <Group>
-          <Image
-            height={65}
-            width={65}
+          <Avatar
+            size={65}
             radius={50}
             src={profile.images[0].url}
             alt={`${profile.display_name}'s profile picture`}
