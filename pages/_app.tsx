@@ -11,28 +11,44 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { Header } from "../components";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
 import NextNProgress from "nextjs-progressbar";
+import { GetServerSidePropsContext } from "next";
+import { getCookie, setCookie } from "cookies-next";
+// import ClientCookies from "js-cookie";
 
-// export const IP_ADDRESS = "10.101.7.9"; // office IP address
-export const IP_ADDRESS = "192.168.1.253"; // home IP address
+export const IP_ADDRESS = "10.101.7.9"; // office IP address
+// export const IP_ADDRESS = "192.168.1.253"; // home IP address
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp(
+  props: AppProps & { colorScheme: ColorScheme; isLoggedIn: boolean }
+) {
+  const { Component, pageProps, isLoggedIn } = props;
   const router = useRouter();
-  const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+  const [colorScheme, setColorScheme] = useState<ColorScheme>(
+    props.colorScheme
+  );
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const toggleColorScheme = (value?: ColorScheme) => {
+    const nextColorScheme =
+      value || (colorScheme === "dark" ? "light" : "dark");
+    setColorScheme(nextColorScheme);
+    setCookie("mantine-color-scheme", nextColorScheme, {
+      maxAge: 60 * 60 * 24 * 30,
+    });
+  };
 
-  useEffect(() => {
-    const cookie = Cookies.get("is-logged-in");
-    if (cookie === "true") {
-      setIsLoggedIn(true);
-    }
-    setIsLoading(false);
-  }, [isLoggedIn]);
+  console.log("isLoggedIn", isLoggedIn);
+
+  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(props.isLoggedIn);
+  // const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  // useEffect(() => {
+  //   const cookie = ClientCookies.get("is-logged-in");
+  //   if (cookie === "true") {
+  //     setIsLoggedIn(true);
+  //   }
+  //   setIsLoading(false);
+  // }, [isLoggedIn]);
 
   return (
     <>
@@ -65,13 +81,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           <AppShell
             padding={"md"}
             fixed={true}
-            header={<Header isLoading={isLoading} isLoggedIn={isLoggedIn} />}
+            header={<Header isLoggedIn={isLoggedIn} />}
             styles={(theme) => ({
-              main: {
+              root: {
                 backgroundColor:
                   theme.colorScheme === "dark"
                     ? theme.colors.backgroundColor[1]
                     : theme.colors.backgroundColor[0],
+                color: theme.colorScheme === "dark" ? "white" : "black",
               },
             })}
           >
@@ -86,3 +103,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
+MyApp.getInitialProps = ({ ctx }: { ctx: GetServerSidePropsContext }) => ({
+  colorScheme: getCookie("mantine-color-scheme", ctx) || "light",
+  isLoggedIn: getCookie("is-logged-in", ctx) || false,
+});
