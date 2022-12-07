@@ -51,7 +51,7 @@ const TrackAnalysis: React.FC<ITrackAnalysis> = ({ token }) => {
 
   return (
     <div>
-      <Text color={"white"}>Track Analysis</Text>
+      <Text>Track Analysis</Text>
     </div>
   );
 };

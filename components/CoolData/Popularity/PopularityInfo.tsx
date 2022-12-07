@@ -6,6 +6,7 @@ import {
   RingProgress,
   Text,
   Title,
+  useMantineColorScheme,
 } from "@mantine/core";
 import React from "react";
 import { InfoCircle } from "tabler-icons-react";
@@ -15,21 +16,14 @@ interface IPopularityInfo {
 }
 
 const PopularityInfo: React.FC<IPopularityInfo> = ({ popularity }) => {
+  const { colorScheme } = useMantineColorScheme();
   const [progressInfo, setProgressInfo] = React.useState<boolean>(false);
 
   return (
     <div>
       <Group spacing={"xs"}>
-        <Title order={3} style={{ color: "white" }}>
-          Popularity
-        </Title>
-        <Popover
-          opened={progressInfo}
-          position='right'
-          // position='center'
-          // styles={{ body: { color: "white" } }}
-          width={"300px"}
-        >
+        <Title order={3}>Popularity</Title>
+        <Popover opened={progressInfo} position='right' width={"300px"}>
           <Popover.Target>
             <ActionIcon
               color={"gray"}
@@ -55,7 +49,7 @@ const PopularityInfo: React.FC<IPopularityInfo> = ({ popularity }) => {
               and album popularity is derived mathematically from track
               popularity.
             </Text>
-            <Text size='xs' mt={"md"} color={"white"}>
+            <Text size='xs' mt={"md"}>
               Note: the popularity value may lag actual popularity by a few
               days: the value is not updated in real time.
             </Text>
@@ -65,14 +59,19 @@ const PopularityInfo: React.FC<IPopularityInfo> = ({ popularity }) => {
       <Center>
         <RingProgress
           label={
-            <Text size='xl' weight={700} align='center' color={"white"}>
+            <Text size='xl' weight={700} align='center'>
               {popularity}
             </Text>
           }
           size={320}
           thickness={60}
           roundCaps={true}
-          sections={[{ value: popularity, color: "white" }]}
+          sections={[
+            {
+              value: popularity,
+              color: colorScheme === "dark" ? "white" : "green",
+            },
+          ]}
         />
       </Center>
     </div>

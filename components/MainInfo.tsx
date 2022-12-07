@@ -1,6 +1,6 @@
-import { Avatar, Badge, Group, Image, Stack, Text, Title } from '@mantine/core';
-import React from 'react';
-import { millisecondsToTime } from '../utils';
+import { Avatar, Badge, Group, Image, Stack, Text, Title } from "@mantine/core";
+import React from "react";
+import { millisecondsToTime } from "../utils";
 
 interface IMainInfo {
   album: any;
@@ -30,42 +30,36 @@ const MainInfo: React.FC<IMainInfo> = ({
         height={290}
         styles={{
           imageWrapper: {
-            boxShadow: '0 4px 60px rgb(255 255 255 / 40%)',
-          }
+            boxShadow: "0 4px 60px rgb(255 255 255 / 40%)",
+          },
         }}
       />
-      <Stack spacing={'xs'} justify={'flex-end'}>
-        <Text color={'white'}> SONG </Text>
-        <Title order={1} style={{ fontSize: '48px', color: 'white' }}>
+      <Stack spacing={"xs"} justify={"flex-end"}>
+        <Text> SONG </Text>
+        <Title order={1} style={{ fontSize: "48px" }}>
           {name}
         </Title>
         <Group>
           {artists.map((artist) => (
-            <Group spacing={'xs'} key={artist.id}>
+            <Group spacing={"xs"} key={artist.id}>
               <Avatar
-                radius={'xl'}
-                size={'sm'}
+                radius={"xl"}
+                size={"sm"}
                 alt={`${artist.name}'s picture`}
                 src={artist?.images[2].url}
               />
-              <Text weight={700} color={'white'}>
-                {artist.name}
-              </Text>
+              <Text weight={700}>{artist.name}</Text>
             </Group>
           ))}
         </Group>
-        <Group spacing={'xs'}>
-          <Text size='sm' color={'white'}>
-            {album.release_date.slice(0, 4)}
-          </Text>
-          <Text color={'white'}> • </Text>
-          <Text size='sm' color={'white'}>
-            {millisecondsToTime(duration)}
-          </Text>
+        <Group spacing={"xs"}>
+          <Text size='sm'>{album.release_date.slice(0, 4)}</Text>
+          <Text> • </Text>
+          <Text size='sm'>{millisecondsToTime(duration)}</Text>
         </Group>
         {explicit && (
           <Badge
-            style={{ width: 'fit-content' }}
+            style={{ width: "fit-content" }}
             color='green'
             fullWidth={true}
             variant='outline'
@@ -73,8 +67,8 @@ const MainInfo: React.FC<IMainInfo> = ({
             Explicit
           </Badge>
         )}
-        <audio controls className={'preview-audio-player'} >
-          <source src={audioPreview} type={'audio/mp3'} />
+        <audio controls className={"preview-audio-player"}>
+          <source src={audioPreview} type={"audio/mp3"} />
         </audio>
       </Stack>
     </Group>

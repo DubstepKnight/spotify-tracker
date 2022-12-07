@@ -3,7 +3,7 @@ import { GetServerSideProps, NextPage } from "next";
 import React from "react";
 
 const PleaseLogin: NextPage = () => {
-  return <Text color={"white"}>Please login for the love of God</Text>;
+  return <Text>Please login for the love of God</Text>;
 };
 
 export default PleaseLogin;

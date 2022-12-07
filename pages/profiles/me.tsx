@@ -15,10 +15,10 @@ import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import { getMyProfile } from "../../requests/getMyProfile";
-import { Profile } from "../../types";
+import { OwnProfile } from "../../types";
 
 interface IProfile {
-  profile: Profile;
+  profile: OwnProfile;
   error: Error;
 }
 
@@ -45,10 +45,8 @@ const MePage: NextPage<IProfile> = ({ profile, error }) => {
             alt={`${profile.display_name}'s profile picture`}
           />
           <Stack spacing={"xs"}>
-            <Title order={4} color={"white"}>
-              {profile.display_name}
-            </Title>
-            <Text size={"sm"} color={"gray.4"}>
+            <Title order={4}>{profile.display_name}</Title>
+            <Text size={"sm"}>
               {profile.id} | {profile.email}
             </Text>
           </Stack>
@@ -56,13 +54,11 @@ const MePage: NextPage<IProfile> = ({ profile, error }) => {
       </Flex>
       <Divider my={"lg"} />
       <Stack spacing={"lg"}>
-        <Text color={"white"}> Followers: {profile.followers.total} </Text>
-        <Text color={"white"}> Country: {profile.country} </Text>
+        <Text> Followers: {profile.followers.total} </Text>
+        <Text> Country: {profile.country} </Text>
       </Stack>
       <Divider my={"lg"} />
-      <Text color={"gray.1"} mb={"lg"}>
-        This will log you out of this app
-      </Text>
+      <Text mb={"lg"}>This will log you out of this app</Text>
       <Button size='md' color={"red"} onClick={logout}>
         Logout
       </Button>

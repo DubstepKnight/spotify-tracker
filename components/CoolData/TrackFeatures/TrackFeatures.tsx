@@ -41,9 +41,7 @@ const TrackFeatures: React.FC<ITrackFeatures> = ({ token, songName }) => {
   if (isLoading) {
     return (
       <Stack spacing={"xl"}>
-        <Title order={2} style={{ color: "white" }}>
-          Track features
-        </Title>
+        <Title order={2}>Track features</Title>
         <Grid align='flex-start' gutter={"xl"} mb={"xl"}>
           <Grid.Col md={10}>
             <Skeleton height={500} radius='lg' />
@@ -70,9 +68,7 @@ const TrackFeatures: React.FC<ITrackFeatures> = ({ token, songName }) => {
   if (audioFeatures) {
     return (
       <Stack spacing={"xl"}>
-        <Title order={2} style={{ color: "white" }}>
-          Track features
-        </Title>
+        <Title order={2}>Track features</Title>
         <Grid align='flex-start' gutter={"xl"} mb={"xl"}>
           <Grid.Col md={10}>
             <TrackRadarChart {...audioFeatures} songName={songName} />

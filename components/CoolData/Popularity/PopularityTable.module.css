@@ -1,10 +1,9 @@
 .track {
-  color: white;
+  font-weight: normal;
 }
 
 .this_track {
-  background-color: white !important;
-  color: black;
+  font-weight: bold;
 }
 
 .track td:nth-child(3) {
@@ -16,5 +15,9 @@
 }
 
 .track td a:hover {
+  color: var(--primary-color);
+}
+
+.this_track td a:hover {
   color: var(--primary-color);
 }

@@ -33,9 +33,8 @@ export const getServerSideProps: GetServerSideProps = async ({
       expires: new Date(new Date().getTime() + 1000 * expires_in),
     });
     return {
-      // TODO: redirect to /profile
       redirect: {
-        destination: "/",
+        destination: "/profiles/me",
         permanent: false,
       },
     };

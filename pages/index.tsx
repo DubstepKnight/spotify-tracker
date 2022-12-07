@@ -1,4 +1,4 @@
-import { Button, Center, Container, Title } from "@mantine/core";
+import { Anchor, Button, Center, Container, Space, Title } from "@mantine/core";
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 interface IHome {
@@ -13,15 +13,24 @@ const Home: NextPage<IHome> = ({ error }) => {
   return (
     <Container fluid={true}>
       <Center my={"xl"}>
-        <Title style={{ color: "white" }}>
-          Please Login to get all the interesting info!
-        </Title>
+        <Title>Please Login to get all the interesting info!</Title>
       </Center>
       <Center>
         <Link href='/login' passHref={true}>
-          <Button color='blue'>Login</Button>
+          <Button color='green'>Login</Button>
         </Link>
       </Center>
+      <Space h={250} />
+      <Container py={"xl"} color='white' fluid={true}>
+        <Center>
+          <Title>
+            Test playlist&nbsp;
+            <Link href={"/playlists/4dEifCIVdKU1V9gsmWk0Wx"} passHref>
+              <Anchor color={"green"}>here</Anchor>
+            </Link>
+          </Title>
+        </Center>
+      </Container>
     </Container>
   );
 };

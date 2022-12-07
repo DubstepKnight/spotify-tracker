@@ -27,9 +27,7 @@ const PopularityTable: React.FC<IPopularityTable> = ({
 
   return (
     <div>
-      <Title order={3} style={{ color: "white" }}>
-        Top 10 tracks
-      </Title>
+      <Title order={3}>Top 10 tracks</Title>
       <Chip.Group
         value={currentArtist}
         onChange={setCurrentArtist}

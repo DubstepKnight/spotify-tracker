@@ -19,7 +19,7 @@ const PlaylistPage: NextPage<IPlaylistPage> = ({ playlist, error }) => {
   return (
     <Container fluid={true}>
       <Center my={"xl"}>
-        <Title style={{ color: "white" }}>{playlist.name}</Title>
+        <Title>{playlist.name}</Title>
       </Center>
       <Playlist playlist={playlist} />
     </Container>

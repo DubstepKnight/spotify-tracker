@@ -1,5 +1,5 @@
-import React from 'react';
-import { Radar } from 'react-chartjs-2';
+import React from "react";
+import { Radar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -8,8 +8,9 @@ import {
   Filler,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { AudioFeatures } from '../../../types';
+} from "chart.js";
+import { AudioFeatures } from "../../../types";
+import { useMantineColorScheme } from "@mantine/core";
 
 ChartJS.register(
   RadialLinearScale,
@@ -22,13 +23,13 @@ ChartJS.register(
 
 type ITrackRadarChart = Pick<
   AudioFeatures,
-  | 'acousticness'
-  | 'danceability'
-  | 'energy'
-  | 'instrumentalness'
-  | 'liveness'
-  | 'speechiness'
-  | 'valence'
+  | "acousticness"
+  | "danceability"
+  | "energy"
+  | "instrumentalness"
+  | "liveness"
+  | "speechiness"
+  | "valence"
 > & { songName: string };
 
 const TrackRadarChart: React.FC<ITrackRadarChart> = ({
@@ -41,33 +42,34 @@ const TrackRadarChart: React.FC<ITrackRadarChart> = ({
   valence,
   songName,
 }) => {
+  const { colorScheme } = useMantineColorScheme();
   const options = {
     legend: {
-      position: 'top',
+      position: "top",
       labels: {
-        fontColor: 'white',
+        fontColor: colorScheme === "dark" ? "white" : "black",
       },
     },
     title: {
       display: true,
       text: songName,
-      fontColor: 'white',
+      fontColor: colorScheme === "dark" ? "white" : "black",
     },
     scales: {
       r: {
         max: 1,
         pointLabels: {
-          color: 'white',
+          color: colorScheme === "dark" ? "white" : "black",
         },
         ticks: {
-          backdropColor: 'transparent',
-          color: 'white',
+          backdropColor: "transparent",
+          color: colorScheme === "dark" ? "white" : "black",
         },
         angleLines: {
-          color: 'gray',
+          color: "gray",
         },
         grid: {
-          color: 'gray',
+          color: "gray",
         },
       },
     },
@@ -75,13 +77,13 @@ const TrackRadarChart: React.FC<ITrackRadarChart> = ({
 
   const data = {
     labels: [
-      'Acousticness',
-      'Danceability',
-      'Energy',
-      'Instrumentalness',
-      'Liveness',
-      'Speechiness',
-      'Valence',
+      "Acousticness",
+      "Danceability",
+      "Energy",
+      "Instrumentalness",
+      "Liveness",
+      "Speechiness",
+      "Valence",
     ],
     datasets: [
       {
@@ -95,15 +97,15 @@ const TrackRadarChart: React.FC<ITrackRadarChart> = ({
           valence,
         ],
         label: songName,
-        backgroundColor: 'green',
-        borderColor: 'white',
+        backgroundColor: "green",
+        borderColor: "white",
         borderWidth: 1,
       },
     ],
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: "100%" }}>
       <Radar data={data} options={options} />
     </div>
   );

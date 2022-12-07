@@ -5,10 +5,8 @@ const Custom404 = () => {
     <Container>
       <Center>
         <Stack align={"center"}>
-          <Title order={1} color={"white"}>
-            404
-          </Title>
-          <Text color={"white"}> The page is not found </Text>
+          <Title order={1}>404</Title>
+          <Text> The page is not found </Text>
         </Stack>
       </Center>
     </Container>

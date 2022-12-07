@@ -14,7 +14,7 @@ import { AudioAnalysis } from "../../types/audioAnalysis";
 interface ITrackPage {
   token: string;
   trackData: any;
-  audioFeatures: AudioFeatures;
+  // audioFeatures: AudioFeatures;
   error: Error;
   artistsTopTracks: any[];
   audioAnalysis?: any;
@@ -26,7 +26,7 @@ const TrackPage: NextPage<ITrackPage> = ({
   trackData,
   artists,
   error,
-  audioFeatures,
+  // audioFeatures,
   artistsTopTracks,
 }) => {
   if (error) {
@@ -49,7 +49,7 @@ const TrackPage: NextPage<ITrackPage> = ({
         artists={artists}
         currentTrack={trackData}
         name={trackData.name}
-        audioFeatures={audioFeatures}
+        // audioFeatures={audioFeatures}
         artistsTopTracks={artistsTopTracks}
       />
     </Container>
@@ -84,17 +84,17 @@ export const getServerSideProps: GetServerSideProps = async ({
       getArtistsTopTracks(token, artist.id)
     );
     const artistsTopTracks = await Promise.all(artistsTopTracksPromises);
-    const trackAudioFeatures = await getTrackAudioFeatures(
-      token,
-      params?.id as string
-    );
+    // const trackAudioFeatures = await getTrackAudioFeatures(
+    //   token,
+    //   params?.id as string
+    // );
     console.timeEnd("getServerSideProps");
     return {
       props: {
         token: token,
         trackData: track,
         artists: detailedArtists.artists,
-        audioFeatures: trackAudioFeatures,
+        // audioFeatures: trackAudioFeatures,
         artistsTopTracks: artistsTopTracks,
       },
     };

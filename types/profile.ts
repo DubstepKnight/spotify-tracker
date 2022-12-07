@@ -7,17 +7,20 @@ type ExplicitContent = {
   filter_locked: boolean;
 };
 
-export type Profile = {
+export type OwnProfile = Profile & {
   country: string;
-  display_name: string;
   email: string;
+  product: "open" | "premium" | "free";
   explicit_content: ExplicitContent;
+};
+
+export type Profile = {
+  display_name: string;
   external_urls: ExternalUrls;
   followers: Followers;
   href: string;
   id: string;
   images: Image[];
-  product: "open" | "premium" | "free";
-  type: string;
+  type: "user";
   uri: string;
 };

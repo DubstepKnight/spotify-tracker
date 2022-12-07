@@ -1,42 +1,58 @@
-import { Button, Group, Header, Loader, Title } from "@mantine/core";
+import {
+  ActionIcon,
+  Button,
+  Group,
+  Header,
+  Loader,
+  Title,
+  useMantineColorScheme,
+} from "@mantine/core";
 import Link from "next/link";
 import React from "react";
+import { MoonStars, Sun } from "tabler-icons-react";
 
 interface ICustomHeader {
   isLoggedIn: boolean;
-  isLoading: boolean;
+  // isLoading: boolean;
 }
 
-const CustomHeader: React.FC<ICustomHeader> = ({ isLoggedIn, isLoading }) => {
+const CustomHeader: React.FC<ICustomHeader> = ({ isLoggedIn }) => {
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+
   return (
     <Header height={60} p='md' className='glassy-background'>
       <Group position='apart'>
         <Link href={"/"} passHref>
           <a>
-            <Title order={2} style={{ color: "white" }}>
-              Ört!
-            </Title>
+            <Title order={2}>Ört!</Title>
           </a>
         </Link>
-        {isLoading ? (
-          <Button variant='light' color={"gray"}>
-            <Loader color={"green"} size={"sm"} variant={"bars"} />
-          </Button>
-        ) : isLoggedIn ? (
-          <Link href={"/me"} passHref={true}>
-            <Button variant='light' color={"gray"}>
-              Profile
-            </Button>
-          </Link>
-        ) : (
-          <a
-            href={"http://localhost:3001/auth/login"}
-            rel={"noreferrer noopener"}
-            target={"_blank"}
+        <Group>
+          <ActionIcon
+            variant='outline'
+            color={"gray"}
+            size={"lg"}
+            radius={"sm"}
+            onClick={() => toggleColorScheme()}
           >
-            <Button color={"green"}>Login</Button>
-          </a>
-        )}
+            {colorScheme === "dark" ? <Sun /> : <MoonStars />}
+          </ActionIcon>
+          {isLoggedIn ? (
+            <Link href={"/profiles/me"} passHref={true}>
+              <Button variant='outline' color={"gray"}>
+                Profile
+              </Button>
+            </Link>
+          ) : (
+            <a
+              href={"http://localhost:3001/auth/login"}
+              rel={"noreferrer noopener"}
+              target={"_blank"}
+            >
+              <Button color={"green"}>Login</Button>
+            </a>
+          )}
+        </Group>
       </Group>
     </Header>
   );
