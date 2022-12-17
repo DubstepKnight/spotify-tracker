@@ -16,9 +16,13 @@ const Home: NextPage<IHome> = ({ error }) => {
         <Title>Please Login to get all the interesting info!</Title>
       </Center>
       <Center>
-        <Link href='/login' passHref={true}>
-          <Button color='green'>Login</Button>
-        </Link>
+        <a
+          href={"http://localhost:3001/auth/login"}
+          rel={"noreferrer noopener"}
+          target={"_blank"}
+        >
+          <Button color={"green"}>Login</Button>
+        </a>
       </Center>
       <Space h={250} />
       <Container py={"xl"} color='white' fluid={true}>

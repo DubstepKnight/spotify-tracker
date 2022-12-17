@@ -14,3 +14,16 @@ export type Artist = {
   type: "artist";
   url: string;
 };
+
+export type FollowingArtists = {
+  href: string;
+  items: Artist[];
+  limit: number;
+  next: string;
+  offset: number;
+  previous: string;
+  total: number;
+  cursors: {
+    after: string;
+  };
+};

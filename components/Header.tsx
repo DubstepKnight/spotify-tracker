@@ -24,7 +24,7 @@ const CustomHeader: React.FC<ICustomHeader> = ({ isLoggedIn }) => {
       <Group position='apart'>
         <Link href={"/"} passHref>
           <a>
-            <Title order={2}>Ört!</Title>
+            <Title order={2}>Ört! 🔥 </Title>
           </a>
         </Link>
         <Group>

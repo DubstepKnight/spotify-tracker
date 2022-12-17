@@ -15,15 +15,19 @@ import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import { getMyProfile } from "../../requests/getMyProfile";
-import { OwnProfile } from "../../types";
+import { getMyFollowingArtists } from "../../requests/getMyFollowingArtists";
+import { FollowingArtists, OwnProfile } from "../../types";
+import { FollowingArtists as FollowingArtistsComponent } from "../../components";
 
 interface IProfile {
   profile: OwnProfile;
+  followingArtists: FollowingArtists;
   error: Error;
 }
 
-const MePage: NextPage<IProfile> = ({ profile, error }) => {
+const MePage: NextPage<IProfile> = ({ profile, followingArtists, error }) => {
   const router = useRouter();
+  console.log("followingArtists.next", followingArtists.next);
 
   if (error) {
     return <div>{error.message}</div>;
@@ -39,10 +43,17 @@ const MePage: NextPage<IProfile> = ({ profile, error }) => {
       <Flex align={"center"} justify='apart'>
         <Group>
           <Avatar
-            size={65}
+            size={75}
             radius={50}
-            src={profile.images[0].url}
+            src={profile.images[0]?.url}
+            color={profile.product === "premium" ? "green" : "gray"}
             alt={`${profile.display_name}'s profile picture`}
+            styles={{
+              root:
+                profile.product === "premium"
+                  ? { border: "4px solid green", boxShadow: "0 0 15px green" }
+                  : { border: "4px solid gray", boxShadow: "0 0 15px gray" },
+            }}
           />
           <Stack spacing={"xs"}>
             <Title order={4}>{profile.display_name}</Title>
@@ -50,12 +61,15 @@ const MePage: NextPage<IProfile> = ({ profile, error }) => {
               {profile.id} | {profile.email}
             </Text>
           </Stack>
+          {/* <Stack>
+            <Text> Followers: {profile.followers.total} </Text>
+            <Text> Country: {profile.country} </Text>
+          </Stack> */}
         </Group>
       </Flex>
       <Divider my={"lg"} />
       <Stack spacing={"lg"}>
-        <Text> Followers: {profile.followers.total} </Text>
-        <Text> Country: {profile.country} </Text>
+        <FollowingArtistsComponent followingArtists={followingArtists} />
       </Stack>
       <Divider my={"lg"} />
       <Text mb={"lg"}>This will log you out of this app</Text>
@@ -74,6 +88,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const token = cookies.get("access-token") as string;
   const isLoggedInToken = cookies.get("is-logged-in") as string;
   const profile = await getMyProfile(token);
+  const followingArtists = await getMyFollowingArtists(token);
+  console.log("followingArtists", followingArtists);
 
   if (isLoggedInToken !== "true" && token) {
     cookies.set("access-token", "");
@@ -92,6 +108,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     return {
       props: {
         profile: profile,
+        followingArtists: followingArtists,
       },
     };
   } catch (error) {

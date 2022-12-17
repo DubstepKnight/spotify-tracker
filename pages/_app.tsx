@@ -7,7 +7,7 @@ import {
   Container,
   MantineProvider,
 } from "@mantine/core";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import { Header } from "../components";
 import { useRouter } from "next/router";
@@ -16,8 +16,9 @@ import { GetServerSidePropsContext } from "next";
 import { getCookie, setCookie } from "cookies-next";
 // import ClientCookies from "js-cookie";
 
-export const IP_ADDRESS = "10.101.7.9"; // office IP address
+// export const IP_ADDRESS = "10.101.7.9"; // office IP address
 // export const IP_ADDRESS = "192.168.1.253"; // home IP address
+export const IP_ADDRESS = "192.168.1.57"; // KZ home IP address
 
 function MyApp(
   props: AppProps & { colorScheme: ColorScheme; isLoggedIn: boolean }
